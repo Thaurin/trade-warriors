@@ -1,5 +1,14 @@
 <template>
     <svg width="800" height="600" style="background-color: #001;">
+        <text v-for="planet in systemConverted" :key="planet.symbol"
+            fill="#ffffff"
+            font-size="10px"
+            font-family="Verdana"
+            x="5"
+            y="15">
+            System OE
+        </text>
+
         <defs v-for="planet in systemConverted" :key="planet.symbol">
             <linearGradient :id="`grad-${planet.symbol}`" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%"
