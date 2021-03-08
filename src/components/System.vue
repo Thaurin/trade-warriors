@@ -1,5 +1,29 @@
 <template>
-    <canvas id="system" width="800" height="600"></canvas>
+    <svg width="800" height="600" style="background-color: #001;">
+        <defs v-for="planet in systemConverted" :key="planet.symbol">
+            <linearGradient :id="`grad-${planet.symbol}`" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"
+            :style="`stop-color: rgb(${planet.r},${planet.g},${planet.b}); stop-opacity:1`" />
+            <stop offset="100%"
+            :style="`stop-color: rgb(${planet.b},${planet.g},${planet.r}); stop-opacity:1`" />
+            </linearGradient>
+        </defs>
+
+        <circle v-for="planet in systemConverted" :key="planet.symbol"
+            :cx="planet.x"
+            :cy="planet.y"
+            :r="planet.radius"
+            :fill="`url(#grad-${planet.symbol})`" />
+
+        <text v-for="planet in systemConverted" :key="planet.symbol"
+            :fill="`rgb(${planet.r},${planet.g},${planet.b})`"
+            :font-size="planet.radius + 5"
+            font-family="Verdana"
+            :x="planet.x + 15"
+            :y="planet.y + 15">
+            {{ planet.name }}
+        </text>
+    </svg>
 </template>
 
 <script lang="ts">
@@ -18,17 +42,13 @@ export default defineComponent({
         }
     },
     methods: {
-        draw(): void {
-            const canvas = document.getElementById('system') as HTMLCanvasElement;
-            if (!canvas) return;
-
-            // canvas.style.width='100%';
-            // canvas.style.height='100%';
-            // canvas.width  = canvas.offsetWidth;
-            // canvas.height = canvas.offsetHeight;
-
-            const context = canvas.getContext('2d') as CanvasRenderingContext2D;
-            if (!context) return;
+    },
+    computed: {
+        system(): Location[] {
+            return this.$store.state.system;
+        },
+        systemConverted(): { name: string; symbol: string; x: number; y: number; radius: number; r: number; g: number; b: number }[] {
+            const converted = [] as { name: string; symbol: string; x: number; y: number; radius: number; r: number; g: number; b: number }[];
 
             let lowestX = 0, lowestY = 0, highestX = 0, highestY = 0;
             for (let i=0; i < this.system.length; i++) {
@@ -55,30 +75,25 @@ export default defineComponent({
                 const g = Math.floor(Math.random() * 200) + 50;
                 const b = Math.floor(Math.random() * 200) + 50;
 
-                context.beginPath();
-                context.arc(newX, newY, radius, 0, 2 * Math.PI, false);
-                context.fillStyle = `rgb(${r}, ${g}, ${b})`;
-                context.fill();
-
-                context.font = `${radius + 6}px Arial`;
-                context.fillText(location.symbol, newX + 20, newY + 20);
+                converted.push({
+                    name: location.name,
+                    symbol: location.symbol,
+                    x: newX,
+                    y: newY,
+                    radius: radius,
+                    r: r,
+                    g: g,
+                    b: b
+                });
             });
 
-            context.fillStyle = 'white';
-            context.font = '12px Arial'
-            context.fillText('System OE', 5, 15);
-        }
-    },
-    computed: {
-        system(): Location[] {
-            return this.$store.state.system;
+            return converted;
         }
     },
     mounted() {
         this.$space.listLocations(this.$store.state.token)
         .then((locations: LocationsResponse) => {
             this.$store.commit('SET_SYSTEM', locations.locations);
-            this.draw();
         })
         .catch((err: Error) => {
             this.$toast.add({severity: 'error', summary: 'Error scanning system', detail: err.message, life: 3000});
