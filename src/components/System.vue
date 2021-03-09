@@ -50,14 +50,23 @@ import { defineComponent } from 'vue';
 import { SpaceTraders } from 'spacetraders-sdk';
 import { Location, LocationsResponse } from 'spacetraders-sdk/dist/types';
 
+interface LocationUI {
+    name: string;
+    symbol: string;
+    x: number;
+    y: number;
+    labelX: number;
+    labelY: number;
+    radius: number;
+    r: number;
+    g: number;
+    b: number;
+}
+
 export default defineComponent({
     data() {
         return {
-            space: new SpaceTraders(),
-            items: [
-                { label: 'Game', icon: 'pi pi-fw pi-user', to: '/' },
-                { label: 'Settings', icon: 'pi pi-fw pi-cog', to: '/settings' },
-            ]
+            space: new SpaceTraders()
         }
     },
     methods: {
@@ -69,29 +78,32 @@ export default defineComponent({
         system(): Location[] {
             return this.$store.state.system;
         },
-        systemConverted(): { name: string; symbol: string; x: number; y: number; radius: number; r: number; g: number; b: number }[] {
-            const converted = [] as { name: string; symbol: string; x: number; y: number; radius: number; r: number; g: number; b: number }[];
+        systemConverted(): LocationUI[] {
+            const converted = [] as LocationUI[];
 
-            let lowestX = 0, lowestY = 0, highestX = 0, highestY = 0;
-            for (let i=0; i < this.system.length; i++) {
-                if (this.system[i].x < lowestX) lowestX = this.system[i].x;
-                if (this.system[i].y < lowestY) lowestY = this.system[i].y;
-                if (this.system[i].x > highestX) highestX = this.system[i].y;
-                if (this.system[i].y > highestY) highestY = this.system[i].y;
-            }
+            const coordsX: number[] = this.system.map(el => el.x).sort((a, b) => a - b);
+            const coordsY: number[] = this.system.map(el => el.y).sort((a, b) => a - b);
 
-            highestX += Math.abs(lowestX);
-            highestY += Math.abs(lowestY);
+            const lowestX = coordsX[0];
+            const lowestY = coordsY[0];
+            let highestX = coordsX[coordsX.length - 1];
+            let highestY = coordsY[coordsY.length - 1];
+
+            // Find the adjument values to shift coordinates into positive values
+            const adjustmentX = Math.abs(lowestX);
+            const adjustmentY = Math.abs(lowestY);
+
+            // Find the upper, positive boundaries
+            highestX += adjustmentX;
+            highestY += adjustmentY;
 
             const margin = 100;
-            const adjustmentX = Math.abs(lowestX);
-            const adjusmentY = Math.abs(lowestY);
-            const width = 700 - margin;
+            const width = 800 - margin;
             const height = 600 - margin;
 
             this.system.forEach((location: Location) => {
                 const newX = (((location.x + adjustmentX) * width) / highestX) + (margin / 2);
-                const newY = height - (((location.y + adjusmentY) * height) / highestY) + (margin / 2);
+                const newY = height - (((location.y + adjustmentY) * height) / highestY) + (margin / 2);
 
                 const radius = ([...location.name].reduce((acc, curr) => acc + curr.charCodeAt(0), 0) % 9) + 4;
                 const r = Math.floor(Math.random() * 200) + 50;
@@ -107,11 +119,7 @@ export default defineComponent({
                     r: r,
                     g: g,
                     b: b
-                });
-
-                if (location.symbol === 'OE-NY') {
-                    console.log(`${location.symbol}, x=${location.x}, y=${location.y} => x=${newX}, y=${newY}`);
-                }
+                } as LocationUI);
             });
 
             return converted;

@@ -21,10 +21,6 @@ export default defineComponent({
         },
     data() {
         return {
-            items: [
-                { label: 'Game', icon: 'pi pi-fw pi-user', to: '/' },
-                { label: 'Settings', icon: 'pi pi-fw pi-cog', to: '/settings' },
-            ]
         }
     },
     methods: {
