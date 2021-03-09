@@ -9,6 +9,15 @@
             System OE
         </text>
 
+        <circle v-for="i in 20" :key="i"
+            :cx="(Math.random() * 800)"
+            :cy="(Math.random() * 800)"
+            :r="1"
+            :fill="`rgba(255,255,255,${Math.random()})`" />
+
+        <line x1="400" y1="0" x2="400" y2="600" style="stroke:#112;stroke-width:2" />
+        <line x1="0" y1="300" x2="800" y2="300" style="stroke:#112;stroke-width:2" />
+
         <defs v-for="planet in systemConverted" :key="planet.symbol">
             <linearGradient :id="`grad-${planet.symbol}`" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%"
