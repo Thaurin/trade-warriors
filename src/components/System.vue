@@ -28,8 +28,8 @@
             :fill="`rgb(${planet.r},${planet.g},${planet.b})`"
             :font-size="planet.radius + 5"
             font-family="Verdana"
-            :x="planet.x + 15"
-            :y="planet.y + 15">
+            :x="planet.x + planet.radius + 4"
+            :y="planet.y + planet.radius + 17">
             {{ planet.name }}
         </text>
     </svg>
@@ -70,16 +70,17 @@ export default defineComponent({
             highestX += Math.abs(lowestX);
             highestY += Math.abs(lowestY);
 
-            const margin = 50;
-            const width = 800;
-            const height = 600;
+            const margin = 100;
+            const width = 800 - margin;
+            const height = 600 - margin;
             const adjustmentX = Math.abs(lowestX);
             const adjusmentY = Math.abs(lowestY);
 
             this.system.forEach((location: Location) => {
-                const newX = (((location.x + adjustmentX) * (width - margin)) / highestX) + (margin / 2);
-                const newY = (((location.y + adjusmentY) * (height - margin)) / highestY) + (margin / 2);
-                const radius = Math.floor(Math.random() * 9) + 4;
+                const newX = (((location.x + adjustmentX) * width) / highestX) + (margin / 2);
+                const newY = height - (((location.y + adjusmentY) * height) / highestY) + (margin / 2);
+
+                const radius = ([...location.name].reduce((acc, curr) => acc + curr.charCodeAt(0), 0) % 9) + 4;
                 const r = Math.floor(Math.random() * 200) + 50;
                 const g = Math.floor(Math.random() * 200) + 50;
                 const b = Math.floor(Math.random() * 200) + 50;
