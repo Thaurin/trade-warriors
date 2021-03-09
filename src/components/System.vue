@@ -31,15 +31,16 @@
             :cx="planet.x"
             :cy="planet.y"
             :r="planet.radius"
-            :fill="`url(#grad-${planet.symbol})`" />
+            :fill="`url(#grad-${planet.symbol})`"
+            @click="onClicked"/>
 
         <text v-for="planet in systemConverted" :key="planet.symbol"
             :fill="`rgb(${planet.r},${planet.g},${planet.b})`"
             :font-size="planet.radius + 5"
             font-family="Verdana"
-            :x="planet.x + planet.radius + 4"
-            :y="planet.y + planet.radius + 17">
-            {{ planet.name }}
+            :x="planet.x + planet.radius - 65"
+            :y="planet.y + planet.radius - 25">
+            {{ planet.symbol }}
         </text>
     </svg>
 </template>
@@ -60,6 +61,9 @@ export default defineComponent({
         }
     },
     methods: {
+        onClicked() {
+            //
+        }
     },
     computed: {
         system(): Location[] {
@@ -80,10 +84,10 @@ export default defineComponent({
             highestY += Math.abs(lowestY);
 
             const margin = 100;
-            const width = 800 - margin;
-            const height = 600 - margin;
             const adjustmentX = Math.abs(lowestX);
             const adjusmentY = Math.abs(lowestY);
+            const width = 700 - margin;
+            const height = 600 - margin;
 
             this.system.forEach((location: Location) => {
                 const newX = (((location.x + adjustmentX) * width) / highestX) + (margin / 2);
@@ -104,6 +108,10 @@ export default defineComponent({
                     g: g,
                     b: b
                 });
+
+                if (location.symbol === 'OE-NY') {
+                    console.log(`${location.symbol}, x=${location.x}, y=${location.y} => x=${newX}, y=${newY}`);
+                }
             });
 
             return converted;
