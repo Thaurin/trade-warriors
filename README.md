@@ -1,5 +1,12 @@
 # SpaceTraders Vue
 
+SpaceTraders Vue is yet another frontend UI for the [SpaceTraders API](https://spacetraders.io/).
+SpaceTraders is a multiplayer space trading game built entirely on RESTful API endpoints.
+
+You can see the current state of SpaceTraders Vue at the following address:
+
+https://thaurin.github.io/space-traders-vue/
+
 ## Project setup
 ```
 npm install
@@ -14,11 +21,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
