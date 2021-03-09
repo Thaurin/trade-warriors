@@ -56,6 +56,11 @@ html {
     margin-top: 10px;
 }
 
+.p-tabmenu {
+    text-align: center;
+    background-color: red i !important;
+}
+
 .tab-container {
     margin: 0.5em 0 0.5em 0;
 }
