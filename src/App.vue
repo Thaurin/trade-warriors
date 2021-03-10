@@ -1,6 +1,14 @@
 <template>
-    <div class="brand">
-        Trade Warriors
+    <div style="display: flex">
+        <div class="brand">
+            Trade Warriors
+        </div>
+        <div class="github">
+            <a href="https://github.com/thaurin/trade-warriors" target="_blank">
+                <i class="pi pi-github"></i>
+                <span>GitHub</span>
+            </a>
+        </div>
     </div>
     <Toast position="top-right" />
     <TabMenu :model="tabItems" />
@@ -47,15 +55,31 @@ html {
     background-color: #222;
 }
 
+a { text-decoration: none; }
+a:link { color: #ffa500; }
+a:visited { color: #ffa500; }
+a:hover { color: gold; }
+a:active { color: gold; }
+
 .brand {
-  font-family: Arial;
-  font-size: 1.75em;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #ffa500;
-  text-align: left;
-  text-shadow: 0px 0px 22px gold;
-  animation: glow 1s ease-in-out infinite alternate;
+    flex: 1;
+    font-family: Arial;
+    font-size: 1.75em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffa500;
+    text-align: left;
+    text-shadow: 0px 0px 22px gold;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+.github {
+    flex: 1;
+    text-align: right;
+}
+
+.github span {
+    margin: 0 0.75em 0 0.75em;
 }
 
 #app {
