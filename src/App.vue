@@ -47,14 +47,14 @@ html {
     background-color: #222;
 }
 
-
 .brand {
-  font-family: 'Brush Script MT', cursive;
-  font-size: 2.8em;
+  font-family: Arial;
+  font-size: 1.75em;
   font-weight: 800;
-  color: gold;
+  text-transform: uppercase;
+  color: #ffa500;
   text-align: left;
-  text-shadow: 0px 0px 22px #ff0;
+  text-shadow: 0px 0px 22px gold;
   animation: glow 1s ease-in-out infinite alternate;
 }
 
