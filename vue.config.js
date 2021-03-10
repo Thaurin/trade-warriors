@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/space-traders-vue/'
+    publicPath: '/trade-warriors/'
 }

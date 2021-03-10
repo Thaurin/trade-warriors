@@ -1,6 +1,6 @@
 <template>
-    <div style="text-align: left">
-        <img src="./assets/logo.png" alt="Logo" width="125">
+    <div class="brand">
+        Trade Warriors
     </div>
     <Toast position="top-right" />
     <TabMenu :model="tabItems" />
@@ -45,6 +45,17 @@ export default defineComponent({
 <style lang="scss">
 html {
     background-color: #222;
+}
+
+
+.brand {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 2.8em;
+  font-weight: 800;
+  color: gold;
+  text-align: left;
+  text-shadow: 0px 0px 22px #ff0;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
 #app {

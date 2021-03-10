@@ -1,11 +1,12 @@
-# SpaceTraders Vue
+# Trade Warriors
 
-SpaceTraders Vue is yet another frontend UI for the [SpaceTraders API](https://spacetraders.io/).
+Trade Warriors is a frontend UI for the online [SpaceTraders API game](https://spacetraders.io/).
 SpaceTraders is a multiplayer space trading game built entirely on RESTful API endpoints.
 
-You can see the current state of SpaceTraders Vue at the following address:
+You can see the current state of Trade Warriors at the address below. Please note that it is
+actively being worked on and may not be fully (or at all) functional.
 
-https://thaurin.github.io/space-traders-vue/
+https://thaurin.github.io/trade-warriors/
 
 ## Project setup
 ```
