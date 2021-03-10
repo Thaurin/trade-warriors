@@ -155,7 +155,7 @@ export default defineComponent({
         }
     },
     mounted() {
-        this.$space.listLocations(this.$store.state.token)
+        this.$space.listLocations()
         .then((locations: LocationsResponse) => {
             this.$store.commit('SET_SYSTEM', locations.locations);
         })

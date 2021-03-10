@@ -37,7 +37,9 @@ export default defineComponent({
         this.$store.state.username = localStorage.getItem('username') ?? '';
         this.$store.state.token = localStorage.getItem('token') ?? '';
 
-        this.$space.getAccount(this.$store.state.username, this.$store.state.token)
+        this.$space.init(this.$store.state.username, this.$store.state.token);
+
+        this.$space.getAccount()
         .then((account: AccountResponse) => {
             this.$store.commit('SET_ACCOUNT', {
                 credits: account.user.credits,
