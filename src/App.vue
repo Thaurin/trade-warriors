@@ -57,6 +57,7 @@ export default defineComponent({
 <style lang="scss">
 html {
     background-color: #12131f;
+    //background-color: #1d1f3d;
     margin: 0;
     padding: 0;
 }
@@ -107,5 +108,9 @@ a:active { color: gold; }
     color: #cad5dd;
     margin: 0;
     padding: 0;
+}
+
+.tab-container {
+    margin: 0.5em;
 }
 </style>

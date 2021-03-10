@@ -1,5 +1,5 @@
 <template>
-    <svg id="system" style="width: 800; height: 600; background-color: #001;" preserveAspectRatio="none">
+    <svg id="system" style="width: 800; height: 600; background-color: #061020; border: 1px solid #1f2d40;" preserveAspectRatio="none">
         <text v-for="planet in systemConverted" :key="planet.symbol"
             fill="#ffffff"
             font-size="10px"
@@ -167,7 +167,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-    #system {
-        background-color: #001;
-    }
 </style>
