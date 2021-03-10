@@ -1,5 +1,5 @@
 <template>
-    <svg id="system" style="width: 800; height: 600; background-color: #001;">
+    <svg id="system" style="width: 800; height: 600; background-color: #001;" preserveAspectRatio="none">
         <text v-for="planet in systemConverted" :key="planet.symbol"
             fill="#ffffff"
             font-size="10px"
@@ -95,9 +95,7 @@ export default defineComponent({
             return this.$store.state.ships[0];
         },
         shipLocation(): { x: number; y: number } | undefined {
-            if (!this.ship) return undefined;
-
-            const location = this.system.find((el: Location) => el.symbol === this.ship.location);
+            const location = this.system.find((el: Location) => el.symbol === this.ship?.location);
             if (!location) return undefined;
 
             const shipCoords = this.convert(location.x, location.y);

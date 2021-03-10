@@ -1,19 +1,21 @@
 <template>
-    <div style="display: flex">
-        <div class="brand">
-            Trade Warriors
+    <div class="page">
+        <div style="display: flex;">
+            <div class="brand">
+                Trade Warriors
+            </div>
+            <div class="github">
+                <a href="https://github.com/thaurin/trade-warriors" target="_blank">
+                    <i class="pi pi-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
         </div>
-        <div class="github">
-            <a href="https://github.com/thaurin/trade-warriors" target="_blank">
-                <i class="pi pi-github"></i>
-                <span>GitHub</span>
-            </a>
+        <Toast position="top-right" />
+        <TabMenu :model="tabItems" />
+        <div class="tab-container">
+        <router-view />
         </div>
-    </div>
-    <Toast position="top-right" />
-    <TabMenu :model="tabItems" />
-    <div class="tab-container">
-      <router-view />
     </div>
 </template>
 
@@ -53,6 +55,19 @@ export default defineComponent({
 <style lang="scss">
 html {
     background-color: #12131f;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    height: 100vh;
+    padding: 0.5em;
 }
 
 a { text-decoration: none; }
@@ -88,6 +103,7 @@ a:active { color: gold; }
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #cad5dd;
-    margin-top: 10px;
+    margin: 0;
+    padding: 0;
 }
 </style>
