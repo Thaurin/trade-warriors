@@ -52,7 +52,7 @@ export default defineComponent({
 
 <style lang="scss">
 html {
-    background-color: #222;
+    background-color: #12131f;
 }
 
 a { text-decoration: none; }
@@ -89,14 +89,5 @@ a:active { color: gold; }
     text-align: center;
     color: #cad5dd;
     margin-top: 10px;
-}
-
-.p-tabmenu {
-    text-align: center;
-    background-color: red i !important;
-}
-
-.tab-container {
-    margin: 0.5em 0 0.5em 0;
 }
 </style>

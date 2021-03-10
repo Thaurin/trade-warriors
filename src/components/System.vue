@@ -18,8 +18,8 @@
         <line x1="400" y1="0" x2="400" y2="600" style="stroke:#112;stroke-width:2" />
         <line x1="0" y1="300" x2="800" y2="300" style="stroke:#112;stroke-width:2" />
 
-        <line v-if="shipLocation !== undefined" :x1="shipLocation?.x" y1="0" :x2="shipLocation?.x" y2="600" style="stroke:#211;stroke-width:1" stroke-dasharray="10,5" d="M5 20 l215 0" />
-        <line v-if="shipLocation !== undefined" x1="0" :y1="shipLocation?.y" x2="800" :y2="shipLocation?.y" style="stroke:#211;stroke-width:1" stroke-dasharray="10,5" d="M5 20 l215 0" />
+        <line v-if="shipLocation" :x1="shipLocation.x" y1="0" :x2="shipLocation?.x" y2="600" style="stroke:#211;stroke-width:1" stroke-dasharray="10,5" d="M5 20 l215 0" />
+        <line v-if="shipLocation" x1="0" :y1="shipLocation.y" x2="800" :y2="shipLocation?.y" style="stroke:#211;stroke-width:1" stroke-dasharray="10,5" d="M5 20 l215 0" />
 
         <defs v-for="planet in systemConverted" :key="planet.symbol">
             <linearGradient :id="`grad-${planet.symbol}`" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -95,17 +95,17 @@ export default defineComponent({
             return this.$store.state.ships[0];
         },
         shipLocation(): { x: number; y: number } | undefined {
-            return undefined;
-            // const location = this.system.find((el: Location) => el.symbol === this.ship.location);
+            if (!this.ship) return undefined;
 
-            // if (!location) return undefined;
+            const location = this.system.find((el: Location) => el.symbol === this.ship.location);
+            if (!location) return undefined;
 
-            // const shipCoords = this.convert(location.x, location.y);
+            const shipCoords = this.convert(location.x, location.y);
 
-            // return {
-            //     x: shipCoords.x,
-            //     y: shipCoords.y
-            // }
+            return {
+                x: shipCoords.x,
+                y: shipCoords.y
+            }
         },
         conversionMap(): { xAdjustment: number; yAdjustment: number; xMax: number; yMax: number} {
             const coordsX: number[] = this.system.map(el => el.x).sort((a, b) => a - b);
