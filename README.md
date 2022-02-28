@@ -10,10 +10,7 @@ https://thaurin.github.io/trade-warriors/
 
 ## Project status
 
-This project is incomplete and a work in progress. Much of the Space Traders API is meant for
-developers to experiment and learn new things using the API. As such, the game is in alpha, which
-would make this project pre-alpha. It will change constantly and things will be broken. Follow the
-project and see how things will (hopefully) improve!
+This project has been abandoned.
 
 ## Project setup
 
